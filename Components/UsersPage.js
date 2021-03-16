@@ -9,16 +9,16 @@ const UsersPage = ({ navigation }) => {
       fetch("https://randomuser.me/api")
         .then((res) => res.json())
         .then((data) =>
-          setUsers((prevUsers) =>
-            setUsers([
+          setUsers((prevUsers) => {
+            return setUsers([
               ...prevUsers,
               { key: data.results[0].login.uuid, value: data.results[0] },
-            ])
-          )
+            ]);
+          })
         );
     getUser();
-    setInterval(getUser, 3000);
-    return () => clearInterval(getUser);
+    const getUserInterval = setInterval(getUser, 5000);
+    return () => clearInterval(getUserInterval);
   }, []);
   return (
     <View>
@@ -66,7 +66,7 @@ const UsersPage = ({ navigation }) => {
           )}
         />
       ) : (
-        <p>Loading..</p>
+        <Text>Loading..</Text>
       )}
     </View>
   );

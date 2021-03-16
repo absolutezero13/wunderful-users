@@ -1,40 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, ScrollView } from "react-native";
+import { View, Text, Image } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 
-const UsersPage = () => {
+const UsersPage = ({ navigation }) => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    const getUser = async () =>
-      await fetch("https://randomuser.me/api")
+    const getUser = () =>
+      fetch("https://randomuser.me/api")
         .then((res) => res.json())
         .then((data) =>
-          setUsers((prevUsers) => setUsers([...prevUsers, data.results[0]]))
+          setUsers((prevUsers) =>
+            setUsers([
+              ...prevUsers,
+              { key: data.results[0].login.uuid, value: data.results[0] },
+            ])
+          )
         );
-
     getUser();
-    setInterval(getUser, 5000);
-
-    return clearInterval(getUser);
+    setInterval(getUser, 3000);
+    return () => clearInterval(getUser);
   }, []);
-
-  console.log(users);
-
   return (
     <View>
       <Text style={{ color: "#b1b8c5", paddingLeft: 20, fontSize: 25 }}>
         PROFILES
       </Text>
-      <ScrollView>
-        {users &&
-          users.map((user) => {
-            return (
+
+      {users ? (
+        <FlatList
+          data={users}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("userDetails", item.value)}
+            >
               <View
-                key={user.login.uuid}
                 style={{
                   flex: 1,
                   paddingHorizontal: 20,
-                  paddingVertical: 10,
-                  marginVertical: 10,
+                  paddingVertical: 15,
+                  marginBottom: 5,
                   flexDirection: "row",
                   alignItems: "center",
                   borderBottomWidth: 1,
@@ -43,7 +47,7 @@ const UsersPage = () => {
               >
                 <Image
                   source={{
-                    uri: user.picture.thumbnail,
+                    uri: item.value.picture.thumbnail,
                   }}
                   style={{ width: 52, height: 52, borderRadius: 50 }}
                 />
@@ -55,12 +59,15 @@ const UsersPage = () => {
                     fontSize: 20,
                   }}
                 >
-                  {user.name.first + ", " + user.dob.age}
+                  {item.value.name.first + ", " + item.value.dob.age}
                 </Text>
               </View>
-            );
-          })}
-      </ScrollView>
+            </TouchableOpacity>
+          )}
+        />
+      ) : (
+        <p>Loading..</p>
+      )}
     </View>
   );
 };

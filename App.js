@@ -1,18 +1,8 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, TextInput, View, Button } from "react-native";
-import UsersPage from "./Components/UsersPage";
-
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import AppNavigator from "./Router";
 const App = () => {
-  return (
-    <View style={styles.container}>
-      <UsersPage />
-    </View>
-  );
+  return <AppNavigator />;
 };
 
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 100,
-  },
-});
 export default App;

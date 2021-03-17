@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Image } from "react-native";
+import React, { useEffect, useState, useCallback } from "react";
+import { StyleSheet, View, Text, Image, Button } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
-
+import { useFocusEffect } from "@react-navigation/native";
 const UsersPage = ({ navigation }) => {
   const [users, setUsers] = useState([]);
   const [visible, setVisible] = useState(true);
   useEffect(() => {
-    const getUser = () =>
+    const getUser = () => {
       fetch("https://randomuser.me/api")
         .then((res) => res.json())
         .then((data) =>
@@ -18,28 +18,40 @@ const UsersPage = ({ navigation }) => {
             ]);
           })
         );
+
+      console.log("cleanup?");
+    };
     getUser();
-    //setInterval(getUser, 10000);
-    return () => clearInterval(getUser);
+    //const userInterval = setInterval(getUser, 5000);
+    return () => clearInterval(userInterval);
   }, []);
+
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     const getUser = () => {
+  //       fetch("https://randomuser.me/api")
+  //         .then((res) => res.json())
+  //         .then((data) =>
+  //           setUsers((prevUsers) => {
+  //             return setUsers([
+  //               ...prevUsers,
+  //               { key: data.results[0].login.uuid, value: data.results[0] },
+  //             ]);
+  //           })
+  //         );
+
+  //       console.log("cleanup?");
+  //     };
+  //     getUser();
+  //     const userInterval = setInterval(getUser, 5000);
+  //     return () => clearInterval(userInterval);
+  //   }, [])
+  // );
   return (
     <View>
-      <View
-        style={{
-          flexDirection: "row",
-          paddingHorizontal: 20,
-          paddingVertical: 15,
-        }}
-      >
-        <Text
-          style={{
-            color: "#b1b8c5",
-            fontSize: 25,
-          }}
-        >
-          PROFILES
-        </Text>
-
+      <View style={styles.header}>
+        <Text style={styles.headerText}>PROFILES</Text>
+        <Button title="delete" onPress={() => setUsers([])} />
         <Icon
           onPress={() => setVisible(!visible)}
           name="bars"
@@ -56,32 +68,14 @@ const UsersPage = ({ navigation }) => {
             <TouchableOpacity
               onPress={() => navigation.navigate("userDetails", item.value)}
             >
-              <View
-                style={{
-                  flex: 1,
-                  paddingHorizontal: 20,
-                  paddingVertical: 15,
-                  marginBottom: 5,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  borderBottomWidth: 1,
-                  borderBottomColor: "#dbe0e5",
-                }}
-              >
+              <View style={styles.user}>
                 <Image
                   source={{
-                    uri: item.value.picture.thumbnail,
+                    uri: item.value.picture.medium,
                   }}
-                  style={{ width: 52, height: 52, borderRadius: 50 }}
+                  style={styles.userImage}
                 />
-                <Text
-                  style={{
-                    color: "#6374f3",
-                    fontWeight: "bold",
-                    marginLeft: 10,
-                    fontSize: 20,
-                  }}
-                >
+                <Text style={styles.username}>
                   {item.value.name.first + ", " + item.value.dob.age}
                 </Text>
                 <Icon
@@ -106,5 +100,38 @@ const UsersPage = ({ navigation }) => {
     </View>
   );
 };
-
+//// STYLES ////
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: "row",
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+  },
+  headerText: {
+    color: "#b1b8c5",
+    fontSize: 25,
+  },
+  user: {
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    paddingBottom: 20,
+    marginBottom: 5,
+    flexDirection: "row",
+    alignItems: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: "#dbe0e5",
+  },
+  userImage: {
+    width: 52,
+    height: 52,
+    borderRadius: 50,
+  },
+  username: {
+    color: "#6374f3",
+    fontWeight: "bold",
+    marginLeft: 10,
+    fontSize: 20,
+  },
+});
 export default UsersPage;

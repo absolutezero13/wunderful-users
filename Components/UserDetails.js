@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
 import MapView, { Marker } from "react-native-maps";
+import Icon from "react-native-vector-icons/FontAwesome";
 const UserDetails = ({ navigation }) => {
   const age = navigation.getParam("dob").age;
   const firstName = navigation.getParam("name").first;
@@ -8,8 +9,8 @@ const UserDetails = ({ navigation }) => {
   const picture = navigation.getParam("picture").large;
   const lat = navigation.getParam("location").coordinates.latitude;
   const long = navigation.getParam("location").coordinates.longitude;
-  console.log(navigation.getParam("picture"));
-  console.log(lat, long);
+  const gender = navigation.getParam("gender");
+
   return (
     <View style={{}}>
       <View
@@ -45,16 +46,36 @@ const UserDetails = ({ navigation }) => {
           height: 300,
         }}
       >
-        {/* <Text>Location</Text> */}
         <Marker coordinate={{ latitude: +lat, longitude: +long }} />
       </MapView>
+      <Text
+        style={{
+          position: "absolute",
+          top: 170,
+          left: 10,
+          color: "#b1b8c5",
+          fontWeight: "bold",
+          fontSize: 16,
+        }}
+      >
+        Location
+      </Text>
       <View style={{ flexDirection: "row" }}>
         <View style={{ height: 220, width: "40%", backgroundColor: "red" }}>
-          <Text>gender</Text>
+          <Text style={{ color: "#b1b8c5", fontWeight: "bold", fontSize: 16 }}>
+            Gender
+          </Text>
+
+          {gender === "female" ? (
+            <Icon name="venus" size={30} color="#b1b8c5" />
+          ) : (
+            <Icon name="mars" size={30} color="#b1b8c5" />
+          )}
         </View>
 
         <View style={{ width: "60%", backgroundColor: "yellow" }}>
-          <Text>row</Text>
+          <Text style={{ color: "#b1b8c5" }}>Age</Text>
+          <Text> {age} </Text>
         </View>
       </View>
     </View>

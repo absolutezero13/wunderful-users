@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Image } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const UsersPage = ({ navigation }) => {
   const [users, setUsers] = useState([]);
+  const [visible, setVisible] = useState(true);
   useEffect(() => {
     const getUser = () =>
       fetch("https://randomuser.me/api")
@@ -22,11 +24,32 @@ const UsersPage = ({ navigation }) => {
   }, []);
   return (
     <View>
-      <Text style={{ color: "#b1b8c5", paddingLeft: 20, fontSize: 25 }}>
-        PROFILES
-      </Text>
+      <View
+        style={{
+          flexDirection: "row",
+          paddingHorizontal: 20,
+          paddingVertical: 15,
+        }}
+      >
+        <Text
+          style={{
+            color: "#b1b8c5",
+            fontSize: 25,
+          }}
+        >
+          PROFILES
+        </Text>
 
-      {users ? (
+        <Icon
+          onPress={() => setVisible(!visible)}
+          name="bars"
+          size={30}
+          color="#6374f3"
+          style={{ marginLeft: "auto" }}
+        />
+      </View>
+
+      {users && visible ? (
         <FlatList
           data={users}
           renderItem={({ item }) => (
@@ -61,13 +84,25 @@ const UsersPage = ({ navigation }) => {
                 >
                   {item.value.name.first + ", " + item.value.dob.age}
                 </Text>
+                <Icon
+                  name="chevron-right"
+                  size={30}
+                  color="#97a2ac"
+                  style={{ marginLeft: "auto" }}
+                />
               </View>
             </TouchableOpacity>
           )}
         />
       ) : (
-        <Text>Loading..</Text>
+        visible && <Text>Loading..</Text>
       )}
+      <Icon
+        style={{ alignSelf: "center" }}
+        name="ellipsis-h"
+        size={25}
+        color="#b1b8c5"
+      />
     </View>
   );
 };

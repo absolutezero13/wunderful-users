@@ -54,7 +54,7 @@ const UserDetails = ({ navigation }) => {
         </View>
         <View style={styles.ageContainer}>
           <Text style={styles.userInfoText}>Age</Text>
-          <Text> {age} </Text>
+          <Text> {age}yo </Text>
         </View>
       </View>
     </View>

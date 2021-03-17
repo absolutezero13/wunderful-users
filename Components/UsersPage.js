@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Image, Button } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useFocusEffect } from "@react-navigation/native";
+
 const UsersPage = ({ navigation }) => {
   const [users, setUsers] = useState([]);
   const [visible, setVisible] = useState(true);
@@ -48,7 +49,7 @@ const UsersPage = ({ navigation }) => {
   //   }, [])
   // );
   return (
-    <View>
+    <View style={styles.home}>
       <View style={styles.header}>
         <Text style={styles.headerText}>PROFILES</Text>
         <Button title="delete" onPress={() => setUsers([])} />
@@ -102,6 +103,9 @@ const UsersPage = ({ navigation }) => {
 };
 //// STYLES ////
 const styles = StyleSheet.create({
+  home: {
+    backgroundColor: "white",
+  },
   header: {
     flexDirection: "row",
     paddingHorizontal: 20,

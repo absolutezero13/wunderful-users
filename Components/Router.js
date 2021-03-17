@@ -6,9 +6,17 @@ import { createStackNavigator } from "react-navigation-stack";
 const screens = {
   users: {
     screen: UsersPage,
+    navigationOptions: {
+      title: "Home",
+      headerTitleAlign: "center",
+    },
   },
   userDetails: {
     screen: UserDetails,
+    navigationOptions: {
+      title: "User Details",
+      headerTitleAlign: "center",
+    },
   },
 };
 

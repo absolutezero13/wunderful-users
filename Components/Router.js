@@ -1,5 +1,5 @@
-import UsersPage from "./Components/UsersPage";
-import UserDetails from "./Components/UserDetails";
+import UsersPage from "./UsersPage";
+import UserDetails from "./UserDetails";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 

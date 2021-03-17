@@ -17,8 +17,8 @@ const UsersPage = ({ navigation }) => {
           })
         );
     getUser();
-    const getUserInterval = setInterval(getUser, 5000);
-    return () => clearInterval(getUserInterval);
+    //setInterval(getUser, 10000);
+    return () => clearInterval(getUser);
   }, []);
   return (
     <View>

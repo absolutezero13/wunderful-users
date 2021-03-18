@@ -18,14 +18,13 @@ const UsersPage = ({ navigation }) => {
             ]);
           })
         );
-
-      console.log("cleanup?");
     };
     getUser();
     const userInterval = setInterval(getUser, 5000);
     return () => clearInterval(userInterval);
   }, []);
 
+  // Doesnt work
   // useFocusEffect(
   //   useCallback(() => {
   //     const getUser = () => {
@@ -51,7 +50,11 @@ const UsersPage = ({ navigation }) => {
     <View style={styles.home}>
       <View style={styles.header}>
         <Text style={styles.headerText}>PROFILES</Text>
-        <Button title="delete" onPress={() => setUsers([])} />
+        <Button
+          title="Clear All"
+          onPress={() => setUsers([])}
+          style={styles.button}
+        />
         <Icon
           onPress={() => setVisible(!visible)}
           name="bars"
@@ -104,6 +107,10 @@ const UsersPage = ({ navigation }) => {
 const styles = StyleSheet.create({
   home: {
     backgroundColor: "white",
+  },
+  button: {
+    marginLeft: 10,
+    height: 20,
   },
   header: {
     flexDirection: "row",

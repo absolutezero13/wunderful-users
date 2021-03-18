@@ -4,15 +4,13 @@ import MapView, { Marker } from "react-native-maps";
 import Icon from "react-native-vector-icons/FontAwesome";
 const UserDetails = ({ navigation }) => {
   const age = navigation.getParam("dob").age;
-  const firstName = navigation.getParam("name").first;
-  const lastName = navigation.getParam("name").last;
   const picture = navigation.getParam("picture").large;
   const gender = navigation.getParam("gender");
-  const lat = navigation.getParam("location").coordinates.latitude;
-  const long = navigation.getParam("location").coordinates.longitude;
-  const country = navigation.getParam("location").country;
-  const state = navigation.getParam("location").state;
-
+  const { first: firstName, last: lastName } = navigation.getParam("name");
+  const { latitude: lat, longitude: long } = navigation.getParam(
+    "location"
+  ).coordinates;
+  const { country, state } = navigation.getParam("location");
   return (
     <View style={{ backgroundColor: "white" }}>
       <View style={styles.user}>
@@ -54,7 +52,16 @@ const UserDetails = ({ navigation }) => {
         </View>
         <View style={styles.ageContainer}>
           <Text style={styles.userInfoText}>Age</Text>
-          <Text> {age}yo </Text>
+          <Text style={styles.age}> {age} yo </Text>
+          <View
+            style={{
+              alignSelf: "flex-end",
+              width: "100%",
+              height: `${age}%`,
+              backgroundColor: "red",
+              backgroundColor: "rgba(99,116,243,0.6)",
+            }}
+          ></View>
         </View>
       </View>
     </View>
@@ -103,14 +110,20 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   ageContainer: {
-    padding: 10,
+    padding: 0,
     width: "65%",
-    backgroundColor: "yellow",
   },
   genderIcon: {
     alignSelf: "center",
     marginTop: 30,
     color: "#6374f3",
+  },
+  age: {
+    marginTop: "auto",
+    marginLeft: "auto",
+    marginRight: 10,
+    borderBottomColor: "black",
+    borderBottomWidth: 1,
   },
 });
 

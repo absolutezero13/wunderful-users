@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback } from "react";
 import { StyleSheet, View, Text, Image, Button } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { useFocusEffect } from "@react-navigation/native";
 
 const UsersPage = ({ navigation }) => {
   const [users, setUsers] = useState([]);
@@ -23,7 +22,7 @@ const UsersPage = ({ navigation }) => {
       console.log("cleanup?");
     };
     getUser();
-    //const userInterval = setInterval(getUser, 5000);
+    const userInterval = setInterval(getUser, 5000);
     return () => clearInterval(userInterval);
   }, []);
 

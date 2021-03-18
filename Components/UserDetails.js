@@ -11,7 +11,8 @@ const UserDetails = ({ navigation }) => {
   const gender = navigation.getParam("gender");
   const { first: firstName, last: lastName } = navigation.getParam("name");
   const { country, state } = navigation.getParam("location");
-  console.log(state, country);
+  console.log(age);
+  // states for more accurate coordinates
   const [lat, setLat] = useState();
   const [long, setLong] = useState();
 
@@ -62,7 +63,7 @@ const UserDetails = ({ navigation }) => {
         </View>
       )}
       <Text style={styles.locationText}>Location</Text>
-      <View style={{ flexDirection: "row", height: "30%" }}>
+      <View style={{ flexDirection: "row", height: "38%" }}>
         <View style={styles.genderContainer}>
           <Text style={styles.userInfoText}>Gender</Text>
           {gender === "female" ? (
@@ -76,11 +77,8 @@ const UserDetails = ({ navigation }) => {
           <Text style={styles.age}> {age} yo </Text>
           <View
             style={{
-              alignSelf: "flex-end",
-              width: "100%",
-              height: `${age}%`,
-              backgroundColor: "red",
-              backgroundColor: "rgba(99,116,243,0.6)",
+              ...styles.visualAge,
+              height: `${age * 1.2}%`,
             }}
           ></View>
         </View>
@@ -115,7 +113,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: "100%",
-    height: 300,
+    height: "41%",
   },
   locationText: {
     position: "absolute",
@@ -126,7 +124,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   loader: {
-    height: 300,
+    height: "41%",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -157,6 +155,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginLeft: 10,
     marginTop: 10,
+  },
+  visualAge: {
+    alignSelf: "flex-end",
+    width: "100%",
+    backgroundColor: "red",
+    backgroundColor: "rgba(99,116,243,0.6)",
   },
 });
 

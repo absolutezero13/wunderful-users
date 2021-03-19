@@ -10,6 +10,7 @@ Wunderful users is using an API which generates random user data dynamically and
     <img width=200 height=400  src="./wunderuser.jpg" />
 </div>
 </div>
+
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:

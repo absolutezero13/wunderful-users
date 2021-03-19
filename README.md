@@ -1,0 +1,16 @@
+# Wunderful Users
+
+Wunderful users is using an API which generates random user data dynamically and displays to the user. This app also allows you to check user's details such as location,age and gender.
+
+## Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+
+- You have installed the latest version of Node.js and Expo cli.
+
+## Installing Wunderful Users
+
+```
+npm install
+
+```

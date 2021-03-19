@@ -4,11 +4,9 @@ Wunderful users is using an API which generates random user data dynamically and
 
 <div style="display: flex;" >
 <div >
-    <img width=200 height=400  src="./wunderhome.jpg" />
+    <img width=200 height=400  src="./wunderhome.jpg" /><img width=200 height=400  src="./wunderuser.jpg" />
 </div>
-<div >
-    <img width=200 height=400  src="./wunderuser.jpg" />
-</div>
+
 </div>
 
 ## Prerequisites

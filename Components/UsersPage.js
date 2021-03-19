@@ -20,8 +20,8 @@ const UsersPage = ({ navigation }) => {
         );
     };
     getUser();
-    // const userInterval = setInterval(getUser, 5000);
-    //return () => clearInterval(userInterval);
+    const userInterval = setInterval(getUser, 5000);
+    return () => clearInterval(userInterval);
   }, []);
   console.log(users);
 

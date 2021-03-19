@@ -2,6 +2,10 @@
 
 Wunderful users is using an API which generates random user data dynamically and displays to the user. This app also allows you to check user's details such as location,age and gender.
 
+<div >
+    <img  src="./wunderhome.jpg" />
+</div>
+
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:

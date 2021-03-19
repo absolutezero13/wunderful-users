@@ -11,6 +11,13 @@ Before you begin, ensure you have met the following requirements:
 ## Installing Wunderful Users
 
 ```
+git clone https://github.com/absolutezero13/wunderful-users.git
+
+```
+
+Open your cloned project file and install the dependencies like this;
+
+```
 npm install
 
 ```
